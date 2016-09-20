@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Chat Server</title>
+        <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+        <script>
+            
+            var socket = io.connect('http://localhost');
+            $(document).ready(function() {
+                $("#submitButton").click(function() {
+                    socket.emit('massage', {
+                        userName: $("#userName")[0].value,
+                        message: $("#message")[0].value
+                    });
+                });
+            })
+            socket.on("publish", function(data) {
+                $("#chatMessage").append("<br><b style='color: red'>" + data.userName + "</b>:  " + data.message);
+            })
+            
+        </script>
+        </script>
+    </head>
+    <body>
+        <form style="border-bottom: 2px solid red;" method="post">
+            <input type="text" name="userName" id="userName" /><br/><br/>
+            <input type="text" name="message"  id="message" /><br/><br/>
+            <input type="button" id="submitButton" value="Send" /><br/><br/>
+        </form>
+        <div id="chatMessage">
+        </div>
+    </body>
+</html>
+           
+
+
+
+          
+
+
+
+        
